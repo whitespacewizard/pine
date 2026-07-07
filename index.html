@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pine Growth Strategy | Aman Raj</title>
+<style>
+  :root {
+    --pine: #0f3f2e;
+    --pine2: #1c6b4d;
+    --mint: #e7f3ed;
+    --cream: #fbf7ec;
+    --gold: #c99632;
+    --red: #ba3632;
+    --ink: #10231c;
+    --muted: #5d6f67;
+    --line: #dfe9e4;
+    --page: #f2f4ee;
+    --white: #ffffff;
+    --shadow: 0 16px 45px rgba(16,35,28,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: var(--page);
+    color: var(--ink);
+    line-height: 1.45;
+    padding: 26px 14px 60px;
+  }
+
+  .toolbar {
+    max-width: 1180px;
+    margin: 0 auto 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .toolbar a {
+    color: var(--pine);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .print-btn {
+    border: 0;
+    background: var(--pine);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 800;
+  }
+
+  .slide {
+    width: min(1180px, 100%);
+    min-height: 720px;
+    margin: 0 auto 30px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 46px 54px;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slide::after {
+    content: "";
+    position: absolute;
+    right: -90px;
+    bottom: -110px;
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    background: rgba(28,107,77,0.06);
+    z-index: 0;
+  }
+
+  .slide > * { position: relative; z-index: 1; }
+
+  .cover {
+    background: linear-gradient(135deg, #0f3f2e 0%, #1c6b4d 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 70px;
+  }
+
+  .cover::after {
+    background: rgba(255,255,255,0.08);
+    width: 420px;
+    height: 420px;
+    right: -120px;
+    bottom: -160px;
+  }
+
+  .cover .badge {
+    background: rgba(255,255,255,0.12);
+    color: #f6d480;
+    border: 1px solid rgba(255,255,255,0.20);
+    margin-bottom: 28px;
+  }
+
+  .cover h1 {
+    color: #fff;
+    font-size: 68px;
+    line-height: 0.96;
+    letter-spacing: -2.6px;
+    max-width: 860px;
+    margin-bottom: 24px;
+  }
+
+  .cover .sub {
+    font-size: 23px;
+    color: #f6d480;
+    font-weight: 700;
+    margin-bottom: 44px;
+  }
+
+  .cover .meta {
+    color: rgba(255,255,255,0.76);
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--pine2);
+    padding-bottom: 15px;
+    margin-bottom: 27px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: linear-gradient(135deg, var(--pine), var(--pine2));
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-weight: 950;
+  }
+
+  .brand-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: var(--pine);
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    margin-top: 2px;
+    font-weight: 700;
+  }
+
+  .slide-no {
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--mint);
+    color: var(--pine2);
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 11px;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 950;
+    margin-bottom: 13px;
+  }
+
+  h1 {
+    color: var(--pine);
+    font-size: 38px;
+    line-height: 1.06;
+    letter-spacing: -1.1px;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    color: var(--pine);
+    font-size: 22px;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    color: var(--pine);
+    font-size: 17px;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    max-width: 930px;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+  .card {
+    background: #f7faf7;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px;
+  }
+
+  .card.gold { background: #fdf8eb; border-color: #efddaf; }
+  .card.red { background: #fff3f2; border-color: #f1c8c5; }
+
+  .tiny-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--pine2);
+    font-weight: 950;
+    margin-bottom: 8px;
+  }
+
+  .gold .tiny-label { color: #9b6c12; }
+  .red .tiny-label { color: #9a2724; }
+
+  .card p, .card li {
+    color: #37443f;
+    font-size: 12.6px;
+  }
+
+  .card ul {
+    padding-left: 17px;
+    margin-top: 9px;
+  }
+
+  .card li {
+    margin: 5px 0;
+  }
+
+  .metric {
+    background: #fff;
+    border-left: 3px solid var(--pine2);
+    border-radius: 7px;
+    padding: 9px 10px;
+    margin-top: 9px;
+    font-size: 11.6px;
+    color: #37443f;
+  }
+
+  .metric strong { color: var(--pine); }
+
+  .insight {
+    margin-top: 20px;
+    background: linear-gradient(135deg, var(--pine), var(--pine2));
+    border-radius: 12px;
+    color: #fff;
+    padding: 21px 24px;
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .insight-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #f6d480;
+    color: var(--pine);
+    display: grid;
+    place-items: center;
+    font-weight: 950;
+    font-size: 18px;
+  }
+
+  .insight p {
+    color: rgba(255,255,255,0.86);
+    font-size: 14px;
+  }
+
+  .insight strong { color: #f6d480; }
+
+  .assumption {
+    background: #fff9ec;
+    border: 1px solid #efd9a2;
+    border-radius: 10px;
+    padding: 14px 17px;
+    color: #6e5222;
+    font-size: 12.7px;
+    margin-bottom: 18px;
+  }
+
+  .stat {
+    background: #f7faf7;
+    border-bottom: 4px solid var(--pine2);
+    border-radius: 10px;
+    padding: 18px 16px;
+    text-align: center;
+    min-height: 105px;
+  }
+
+  .stat.gold { background: #fdf8eb; border-bottom-color: var(--gold); }
+
+  .stat-num {
+    font-size: 34px;
+    color: var(--pine);
+    font-weight: 950;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 10.5px;
+    font-weight: 850;
+  }
+
+  .tier-table, .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: #fff;
+    margin-top: 12px;
+  }
+
+  .tier-table th, .tier-table td,
+  .budget-table th, .budget-table td {
+    border-bottom: 1px solid var(--line);
+    padding: 13px 15px;
+    text-align: left;
+    vertical-align: top;
+    font-size: 12.5px;
+  }
+
+  .tier-table th, .budget-table th {
+    background: #f1f5f2;
+    color: var(--muted);
+    font-size: 10.6px;
+    text-transform: uppercase;
+    letter-spacing: 0.9px;
+    font-weight: 950;
+  }
+
+  .tier-table tr:last-child td,
+  .budget-table tr:last-child td { border-bottom: 0; }
+
+  .budget-table tr.recommended { background: #eef8f2; }
+
+  .pill {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: var(--mint);
+    color: var(--pine2);
+    font-size: 10px;
+    font-weight: 950;
+    margin-left: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .funnel {
+    margin-top: 14px;
+    background: #f7faf7;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 18px 18px;
+  }
+
+  .funnel-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .funnel-stage {
+    color: #fff;
+    text-align: center;
+    padding: 11px 18px;
+    min-height: 54px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    clip-path: polygon(5% 0, 95% 0, 88% 100%, 12% 100%);
+    background: linear-gradient(90deg, var(--pine2), #4c9b76);
+    box-shadow: 0 7px 15px rgba(16, 63, 46, 0.10);
+  }
+
+  .funnel-stage strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 950;
+    line-height: 1.15;
+  }
+
+  .funnel-stage span {
+    display: block;
+    font-size: 10.6px;
+    color: rgba(255,255,255,0.84);
+    margin-top: 3px;
+    line-height: 1.25;
+  }
+
+  .funnel-stage.s1 { width: 100%; }
+  .funnel-stage.s2 { width: 84%; background: linear-gradient(90deg, #176346, #42936e); }
+  .funnel-stage.s3 { width: 68%; background: linear-gradient(90deg, #14563e, #35845f); }
+  .funnel-stage.s4 { width: 52%; background: linear-gradient(90deg, #124a36, #2b7654); }
+  .funnel-stage.s5 { width: 36%; background: linear-gradient(90deg, #0f3f2e, #226747); }
+
+  .funnel-caption {
+    margin-top: 12px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 11.2px;
+  }
+
+  .setu-layout {
+    display: grid;
+    grid-template-columns: 0.84fr 1.16fr;
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .setu-box {
+    background: linear-gradient(160deg, var(--pine), var(--pine2));
+    color: #fff;
+    border-radius: 14px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 380px;
+  }
+
+  .setu-big {
+    font-size: 92px;
+    line-height: 0.9;
+    letter-spacing: -4px;
+    font-weight: 950;
+    margin: 20px 0 12px;
+  }
+
+  .setu-box p {
+    color: rgba(255,255,255,0.84);
+    font-size: 12.5px;
+  }
+
+  .steps {
+    display: grid;
+    gap: 10px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 13px;
+    background: #f7faf7;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--pine2);
+    border-radius: 11px;
+    padding: 13px 15px;
+  }
+
+  .step-no {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--mint);
+    color: var(--pine2);
+    display: grid;
+    place-items: center;
+    font-size: 13px;
+    font-weight: 950;
+  }
+
+  .step p {
+    color: #37443f;
+    font-size: 11.7px;
+    margin-top: 2px;
+  }
+
+  .cohort {
+    margin-top: 14px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+
+  .cohort div {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 11px 10px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .cohort strong {
+    display: block;
+    color: var(--pine);
+    font-size: 15px;
+    margin-bottom: 3px;
+  }
+
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .phase {
+    background: #f7faf7;
+    border: 1px solid var(--line);
+    border-top: 5px solid var(--pine2);
+    border-radius: 12px;
+    padding: 19px 18px;
+  }
+
+  .phase.gold {
+    background: #fdf8eb;
+    border-top-color: var(--gold);
+  }
+
+  .phase.red {
+    background: #fff3f2;
+    border-top-color: var(--red);
+  }
+
+  .phase-label {
+    text-transform: uppercase;
+    color: var(--pine2);
+    letter-spacing: 1.1px;
+    font-size: 11px;
+    font-weight: 950;
+    margin-bottom: 5px;
+  }
+
+  .gold .phase-label { color: #9b6c12; }
+  .red .phase-label { color: #9a2724; }
+
+  .phase ul {
+    list-style: none;
+    margin-top: 9px;
+  }
+
+  .phase li {
+    color: #37443f;
+    font-size: 12.3px;
+    margin: 7px 0;
+    padding-left: 15px;
+    position: relative;
+  }
+
+  .phase li::before {
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--pine2);
+    font-weight: 950;
+  }
+
+  .milestone {
+    margin-top: 13px;
+    background: rgba(28,107,77,0.11);
+    border-radius: 8px;
+    padding: 10px 11px;
+    color: var(--pine);
+    font-size: 11.5px;
+    font-weight: 850;
+  }
+
+  .channel-split {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .kpi-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .kpi {
+    background: #f7faf7;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 13px 14px;
+  }
+
+  .kpi strong {
+    display: block;
+    color: var(--pine);
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+
+  .kpi span {
+    color: var(--muted);
+    font-size: 11.7px;
+  }
+
+  .why {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 13px;
+    margin-top: 16px;
+  }
+
+  .why-card {
+    background: #f7faf7;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--pine2);
+    border-radius: 10px;
+    padding: 15px;
+  }
+
+  .why-card p {
+    font-size: 11.7px;
+    color: #37443f;
+  }
+
+  .final-ask {
+    margin-top: 17px;
+    background: linear-gradient(135deg, var(--pine), var(--pine2));
+    color: #fff;
+    border-radius: 13px;
+    padding: 22px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .final-ask h2 { color: #f6d480; margin-bottom: 5px; }
+
+  .final-ask p {
+    color: rgba(255,255,255,0.86);
+    font-size: 13px;
+  }
+
+  @media (max-width: 920px) {
+    body { padding: 12px 10px 40px; }
+    .toolbar { flex-direction: column; align-items: flex-start; }
+    .slide { min-height: auto; padding: 32px 22px; }
+    .cover { padding: 48px 28px; }
+    .cover h1 { font-size: 46px; }
+    .grid-2, .grid-3, .grid-4, .setu-layout, .roadmap, .channel-split, .why, .final-ask { grid-template-columns: 1fr; }
+    .funnel-row { grid-template-columns: 1fr; }
+    .funnel-note { text-align: left; }
+    .cohort { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .toolbar { display: none; }
+    .slide {
+      width: 100%;
+      min-height: 100vh;
+      box-shadow: none;
+      border-radius: 0;
+      margin: 0;
+      page-break-after: always;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div><strong>Final HTML deck</strong> | 6 focused slides, no unsupported TAM or revenue projection</div>
+  <button class="print-btn" onclick="window.print()">Print or Save PDF</button>
+</div>
+
+<section class="slide cover">
+  <span class="badge">Founder discussion deck</span>
+  <h1>Building Pine's Revenue Engine</h1>
+  <div class="sub">A 90-day plan for Pine Careers and Pine Setu pre-launch</div>
+  <div class="meta">
+    <div><strong>Aman Raj</strong> | Marketing and Growth Professional</div>
+    <div>Prepared for Pine Leadership | July 2026</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="header">
+    <div class="brand">
+      <div class="mark">P</div>
+      <div>
+        <div class="brand-title">Pine Growth Strategy</div>
+        <div class="brand-sub">Aman Raj | July 2026</div>
+      </div>
+    </div>
+    <div class="slide-no">02 / 06</div>
+  </div>
+
+  <span class="badge">01 | What I understood</span>
+  <h1>One ecosystem. Three growth jobs.</h1>
+  <p class="subtitle">Pine's advantage is the combination of global education, alumni intelligence, employability outcomes and university relationships. The marketing job is to make that ecosystem easy to understand, easy to trust and easy to buy.</p>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="tiny-label">B2B core</div>
+      <h3>Pine Careers</h3>
+      <p>High-ticket university partnerships for alumni chapters, industry collaborations, employability outcomes and India market access.</p>
+      <div class="metric"><strong>Buyers:</strong> Vice Chancellors, Pro VCs, International Engagement, Careers, Alumni and Industry Partnerships.</div>
+      <div class="metric"><strong>Commercial model:</strong> Retainer and one-time strategic projects.</div>
+    </div>
+
+    <div class="card gold">
+      <div class="tiny-label">B2C and institutional bridge</div>
+      <h3>Pine Overseas</h3>
+      <p>Study-abroad counselling with a career-outcomes-first positioning, supported by university relationships and new destination expansion.</p>
+      <div class="metric"><strong>Model:</strong> University-side commission, no student-side fee.</div>
+      <div class="metric"><strong>Role:</strong> Student demand, university relationships and education market insight.</div>
+    </div>
+
+    <div class="card red">
+      <div class="tiny-label">Platform launch</div>
+      <h3>Pine Setu</h3>
+      <p>Alumni intelligence and engagement platform for the reverse brain drain opportunity, launching around September.</p>
+      <div class="metric"><strong>Ambition:</strong> 100K alumni in the first 3 months, to be operationally defined.</div>
+      <div class="metric"><strong>Monetisation:</strong> Subscription access to verified intelligence and engagement workflows.</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-icon">!</div>
+    <p><strong>The central narrative:</strong> Pine is not just selling services. It is building the infrastructure for reverse brain drain: global alumni returning value to India through careers, chapters, industry access and university outcomes.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="header">
+    <div class="brand">
+      <div class="mark">P</div>
+      <div>
+        <div class="brand-title">Pine Growth Strategy</div>
+        <div class="brand-sub">Aman Raj | July 2026</div>
+      </div>
+    </div>
+    <div class="slide-no">03 / 06</div>
+  </div>
+
+  <span class="badge">02 | B2B growth engine</span>
+  <h1>Turn founder credibility into repeatable pipeline.</h1>
+  <p class="subtitle">The first 90 days should not chase generic visibility. It should create precise visibility among international university decision-makers, then move the right accounts into founder-led conversations.</p>
+
+  <div class="assumption"><strong>Planning basis:</strong> 2 completed projects, 1 ongoing project, 45 to 60 day B2B sales cycle, 15-client milestone over 36 months, 1,500 target university universe and 30-client "wow factor" at 2 percent. Targets should be recalibrated after the first 30 days of data.</div>
+
+  <div class="grid-4">
+    <div class="stat">
+      <div class="stat-num">15</div>
+      <div class="stat-label">Client milestone over 36 months</div>
+    </div>
+    <div class="stat gold">
+      <div class="stat-num">45-60</div>
+      <div class="stat-label">Days in typical B2B cycle</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1,500</div>
+      <div class="stat-label">Target university universe</div>
+    </div>
+    <div class="stat gold">
+      <div class="stat-num">30</div>
+      <div class="stat-label">Stretch client opportunity</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top: 18px;">
+    <div>
+      <h2>Account tiering</h2>
+      <table class="tier-table">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Account logic</th>
+            <th>Marketing motion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Tier 1</strong><br>50 accounts</td>
+            <td>Highest fit by geography, alumni footprint, India intent and employability need.</td>
+            <td>Deep personalisation, founder-led outreach, warm intros, custom proof assets.</td>
+          </tr>
+          <tr>
+            <td><strong>Tier 2</strong><br>150 accounts</td>
+            <td>Strong segment fit, but not immediate top priority.</td>
+            <td>Segment-based messaging, LinkedIn, email nurture, webinars and proof-led content.</td>
+          </tr>
+          <tr>
+            <td><strong>Tier 3</strong><br>Wider universe</td>
+            <td>Longer-term accounts from the 1,500-university universe.</td>
+            <td>Content, retargeting, PR, newsletters, events and authority building.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h2>Account-based funnel</h2>
+      <div class="funnel">
+        <div class="funnel-stack">
+          <div class="funnel-stage s1">
+            <strong>Named accounts</strong>
+            <span>Mapped and prioritised</span>
+          </div>
+          <div class="funnel-stage s2">
+            <strong>Engaged accounts</strong>
+            <span>Content, outreach and warm introductions</span>
+          </div>
+          <div class="funnel-stage s3">
+            <strong>Qualified meetings</strong>
+            <span>Need, authority, timing and budget path</span>
+          </div>
+          <div class="funnel-stage s4">
+            <strong>Proposals or pilots</strong>
+            <span>Defined scope and outcome</span>
+          </div>
+          <div class="funnel-stage s5">
+            <strong>Client wins</strong>
+            <span>Founder-led closure</span>
+          </div>
+        </div>
+        <div class="funnel-caption">The funnel shows the process, not fixed conversion percentages.</div>
+      </div>
+      <div class="insight" style="margin-top: 14px; padding: 16px 18px;">
+        <div class="insight-icon">✓</div>
+        <p><strong>90-day realistic outcome:</strong> 3 to 5 qualified opportunities, 1 to 2 active proposals and one signed client as a stretch outcome depending on existing pipeline readiness.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="header">
+    <div class="brand">
+      <div class="mark">P</div>
+      <div>
+        <div class="brand-title">Pine Growth Strategy</div>
+        <div class="brand-sub">Aman Raj | July 2026</div>
+      </div>
+    </div>
+    <div class="slide-no">04 / 06</div>
+  </div>
+
+  <span class="badge">03 | Pine Setu pre-launch framework</span>
+  <h1>Design the 100K journey before launch.</h1>
+  <p class="subtitle">Pine Setu is not live yet, so this is not a performance claim. It is a pre-launch measurement and activation framework for the September ambition. Database scale, verified registration and active use should be tracked separately.</p>
+
+  <div class="setu-layout">
+    <div class="setu-box">
+      <div>
+        <span class="badge" style="background: rgba(255,255,255,0.13); color: #f6d480;">September pre-launch ambition</span>
+        <div class="setu-big">100K</div>
+        <h2 style="color: #fff;">alumni in first 3 months</h2>
+      </div>
+      <p>Before launch, Pine should define whether 100K means records sourced, alumni contacted, verified registrations, completed profiles or active users. The strategy should report each layer separately.</p>
+    </div>
+
+    <div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-no">01</div>
+          <div>
+            <h3>Identify</h3>
+            <p>Build alumni cohorts from university networks, founder relationships, associations, referrals, events and compliant data partnerships.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">02</div>
+          <div>
+            <h3>Verify</h3>
+            <p>Confirm identity, institution, year, career stage, location and consent so the database becomes trusted intelligence, not a raw list.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">03</div>
+          <div>
+            <h3>Activate</h3>
+            <p>Use chapters, opportunities, peer discovery, recognition, events and career outcomes to create reasons for alumni to return.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-no">04</div>
+          <div>
+            <h3>Monetise</h3>
+            <p>Offer subscription access to verified alumni intelligence, engagement workflows and curated matching. Avoid positioning it as raw data sales.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size: 10.8px; color: var(--muted); margin: 12px 0 6px; font-weight: 800;">Illustrative cohort sequence, to be finalised after the initial data audit</div>
+      <div class="cohort">
+        <div><strong>10K</strong>pilot cohort</div>
+        <div><strong>25K</strong>records sourced</div>
+        <div><strong>50K</strong>invited or contacted</div>
+        <div><strong>75K</strong>verified layer grows</div>
+        <div><strong>100K</strong>defined target layer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-icon">→</div>
+    <p><strong>Pre-launch principle:</strong> Build Setu as a trust product. The more senior the alumni base, the more important consent, verification, relevance and usefulness become.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="header">
+    <div class="brand">
+      <div class="mark">P</div>
+      <div>
+        <div class="brand-title">Pine Growth Strategy</div>
+        <div class="brand-sub">Aman Raj | July 2026</div>
+      </div>
+    </div>
+    <div class="slide-no">05 / 06</div>
+  </div>
+
+  <span class="badge">04 | 90-day execution</span>
+  <h1>Build, activate, then convert.</h1>
+  <p class="subtitle">The first quarter should create a working revenue system, not a large volume of disconnected marketing activity. The plan is designed around the 45 to 60 day sales cycle without pretending marketing controls every closure.</p>
+
+  <div class="roadmap">
+    <div class="phase">
+      <div class="phase-label">Days 1 to 30</div>
+      <h3>Foundation</h3>
+      <ul>
+        <li>Audit website, analytics, CRM, social presence, content and sales handoff.</li>
+        <li>Finalise ICPs, account tiers and first geography sequence.</li>
+        <li>Build service-specific messaging, proof assets and case-study structure.</li>
+        <li>Map Tier 1 and Tier 2 accounts with buyer contacts and buying triggers.</li>
+        <li>Define Pine Setu onboarding layers and pre-launch cohorts.</li>
+      </ul>
+      <div class="milestone">Milestone: Tracking live, account list ready, messaging approved.</div>
+    </div>
+
+    <div class="phase gold">
+      <div class="phase-label">Days 31 to 60</div>
+      <h3>Market activation</h3>
+      <ul>
+        <li>Launch founder-led LinkedIn, email and warm-intro outreach.</li>
+        <li>Publish landing pages, founder POVs and proof-led content.</li>
+        <li>Run one focused webinar or university roundtable.</li>
+        <li>Start retargeting, nurture sequences and sales enablement follow-ups.</li>
+        <li>Launch Pine Setu pilot cohorts with clear Identify, Verify and Activate metrics.</li>
+      </ul>
+      <div class="milestone">Milestone: 3 to 5 qualified B2B conversations in motion.</div>
+    </div>
+
+    <div class="phase red">
+      <div class="phase-label">Days 61 to 90</div>
+      <h3>Optimise and convert</h3>
+      <ul>
+        <li>Double down on best-performing account segments and messages.</li>
+        <li>Move qualified conversations into proposals, pilots or MOU discussions.</li>
+        <li>Document objections, proof gaps and sales-cycle blockers.</li>
+        <li>Publish first formal Pine Careers proof asset or case narrative.</li>
+        <li>Create Q2 scale plan for geography, budget, team and Pine Setu growth.</li>
+      </ul>
+      <div class="milestone">Milestone: 1 to 2 active proposals. Signed client is a stretch outcome.</div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="insight-icon">✓</div>
+    <p><strong>Unfair advantage:</strong> The founder network is not separate from marketing. It should be the highest-trust acquisition channel, supported by content, account intelligence, landing pages and structured follow-up.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="header">
+    <div class="brand">
+      <div class="mark">P</div>
+      <div>
+        <div class="brand-title">Pine Growth Strategy</div>
+        <div class="brand-sub">Aman Raj | July 2026</div>
+      </div>
+    </div>
+    <div class="slide-no">06 / 06</div>
+  </div>
+
+  <span class="badge">05 | Investment, KPIs and ownership</span>
+  <h1>Lean enough to learn. Funded enough to execute.</h1>
+  <p class="subtitle">The recommended budget should support B2B account activation, proof creation, targeted distribution and Pine Setu experiments. It should not pretend to cover large offline events, internal salaries or product development.</p>
+
+  <div class="channel-split">
+    <div>
+      <h2>Budget scenarios</h2>
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th>Monthly range</th>
+            <th>Best used for</th>
+            <th>Trade-off</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Lean validation</strong></td>
+            <td><strong>₹2 to 3L</strong></td>
+            <td>Core tools, account data, founder content, basic landing pages and outreach.</td>
+            <td>Slower testing and limited paid distribution.</td>
+          </tr>
+          <tr class="recommended">
+            <td><strong>Recommended</strong><span class="pill">Best balance</span></td>
+            <td><strong>₹4 to 6L</strong></td>
+            <td>Consistent content, ABM, targeted media, webinars, Setu experiments, creative and analytics.</td>
+            <td>Requires strict prioritisation across Pine Careers, Overseas and Setu.</td>
+          </tr>
+          <tr>
+            <td><strong>Scale after proof</strong></td>
+            <td><strong>₹8 to 10L</strong></td>
+            <td>Multiple geographies, stronger partnerships, events, PR and Pine Setu acceleration.</td>
+            <td>Should start only after funnel economics and audience quality are visible.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div>
+      <h2>KPIs that matter</h2>
+      <div class="kpi-list">
+        <div class="kpi"><strong>Account engagement</strong><span>Decision-maker touches, replies, referrals and content engagement.</span></div>
+        <div class="kpi"><strong>Qualified meetings</strong><span>Need, authority, timing and budget path validated.</span></div>
+        <div class="kpi"><strong>Proposal value</strong><span>Pipeline value created and moved into founder-led sales.</span></div>
+        <div class="kpi"><strong>Sales velocity</strong><span>Time from first touch to meeting, proposal and close.</span></div>
+        <div class="kpi"><strong>Setu verification</strong><span>Records sourced, contacted, verified, completed and active.</span></div>
+        <div class="kpi"><strong>Proof creation</strong><span>Case studies, founder POVs, landing pages and sales assets shipped.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="why">
+    <div class="why-card">
+      <h3>0-to-1 builder</h3>
+      <p>Built AccountX lead-generation infrastructure from scratch and generated around 80 qualified opportunities per month across 10 global markets.</p>
+    </div>
+    <div class="why-card">
+      <h3>Enterprise B2B</h3>
+      <p>Owned GTM for high-value Quick Clean enterprise accounts and improved MQL-to-SQL conversion by 40 percent through segmentation and nurturing.</p>
+    </div>
+    <div class="why-card">
+      <h3>Performance mindset</h3>
+      <p>Grew Google Ads conversions from 48 to 361 for a clinic and cut cost per conversion by 85.7 percent.</p>
+    </div>
+    <div class="why-card">
+      <h3>Builder who executes</h3>
+      <p>I can build the growth engine, run early experiments and create the systems a team can scale.</p>
+    </div>
+  </div>
+
+  <div class="final-ask">
+    <div>
+      <h2>What I would own</h2>
+      <p>The marketing operating system across Pine Careers and Pine Setu: ICP, messaging, account activation, content, landing pages, funnel tracking and founder sales support.</p>
+    </div>
+    <div>
+      <p><strong>First-quarter ask:</strong> alignment on priorities, access to current marketing and sales systems, and ownership of building a measurable growth engine. The immediate goal is qualified B2B pipeline, active proposals and a validated Pine Setu acquisition model.</p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
